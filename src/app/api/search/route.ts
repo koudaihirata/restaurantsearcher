@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 
+const API_KEY = process.env.HOTPEPPER_API_KEY;
+
 export async function GET() {
   return NextResponse.json({
-    message: "/api/searchからデータを取得!",
+    message: API_KEY,
   })
 }
