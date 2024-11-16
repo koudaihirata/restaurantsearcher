@@ -17,7 +17,7 @@ export default function Test() {
 
     return (
         <>
-            <button onClick={getData} className="w-16 border-solid border-red-300 border-2">ゲット</button>
+            <button onClick={getData} className="w-16 m-16 border-solid border-red-300 border-2">ゲット</button>
             <div className="w-full flex flex-wrap">
                 {shopData.map((shop, index) => (
                     <ShopInfo key={index} shop={shop}/>
