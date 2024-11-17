@@ -2,12 +2,11 @@
 
 import { createContext, useContext } from "react";
 import { mainColor, subColor } from "@/app/style/color";
-import { faBars, faHouse, faMap, faRectangleList } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import Link from "next/link";
+import Navigation from "./Navigation";
 
-// Contextの作成
 export const NabFlagContext = createContext<{ nabFlag: boolean, setNabFlag: (flag: boolean) => void }>({ nabFlag: true, setNabFlag: () => {} });
 
 export default function Header() {
@@ -24,27 +23,7 @@ export default function Header() {
                 <h1><Image src="/ロゴ.png" alt="ロゴ" width={40} height={40} /></h1>
                 <Image src="/ベイマックス.jpg" alt="プロフィール画像" width={40} height={40} className="rounded-full" />
             </section>
-            <div className={`w-64 h-screen fixed top-0 ${nabFlag ? '-left-64' : 'left-0'} z-20 flex flex-col transition-all duration-500`} style={{backgroundColor:mainColor}}>
-                <div className="flex items-center gap-4 mt-24 ml-8">
-                    <FontAwesomeIcon icon={faHouse} className="w-6 h-6" style={{color:subColor}} />
-                    <p className="text-xl" style={{color:subColor}}>HOME</p>
-                </div>
-                <div className="flex items-center gap-4 mt-4 ml-8">
-                    <FontAwesomeIcon icon={faMap} className="w-6 h-6" style={{color:subColor}} />
-                    <p className="text-xl" style={{color:subColor}}>MAP</p>
-                </div>
-                <div className="flex items-center gap-4 mt-4 ml-8">
-                    <FontAwesomeIcon icon={faRectangleList} className="w-6 h-6" style={{color:subColor}} />
-                    <p className="text-xl" style={{color:subColor}}>LIST</p>
-                </div>
-                <div className="w-4/5 h-0.5 m-auto mt-4" style={{backgroundColor:subColor}}></div>
-                <div>
-                    <Link href="http://webservice.recruit.co.jp/">
-                        <Image src="http://webservice.recruit.co.jp/banner/hotpepper-m.gif" alt="ホットペッパーグルメ Webサービス" width={88} height={35} className="m-auto"/>
-                    </Link>
-                    <p className="text-center mt-2 mb-2" style={{color:subColor}}>&copy;2024 hirata</p>
-                </div>
-            </div>
+            <Navigation nabFlag={nabFlag} />
         </header>
     );
 }
