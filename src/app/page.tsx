@@ -1,10 +1,9 @@
 'use client';
 
-import Position from "./components/Position";
-import Test from "./components/test";
 import { useState } from "react";
 import { NabFlagContext } from "./components/header/Header";
 import Header from "./components/header/Header";
+import HomeP from "./pages/HomeP/page";
 
 export default function Home() {
   const [nabFlag, setNabFlag] = useState<boolean>(true);
@@ -13,8 +12,7 @@ export default function Home() {
     <NabFlagContext.Provider value={{ nabFlag, setNabFlag }}>
       <Header />
       <section className={`mt-14 ${nabFlag ? 'ml-0' : 'ml-64'} transition-all duration-500`}>
-        <Test/>
-        <Position/>
+        <HomeP />
       </section>
     </NabFlagContext.Provider>
   );
