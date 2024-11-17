@@ -1,11 +1,21 @@
+'use client';
+
 import Position from "./components/Position";
-import Test from "./components/test"; // 修正: ファイル名の大文字小文字を一致させる
+import Test from "./components/test";
+import { useState } from "react";
+import { NabFlagContext } from "./components/header/Header";
+import Header from "./components/header/Header";
 
 export default function Home() {
+  const [nabFlag, setNabFlag] = useState<boolean>(true);
+
   return (
-    <section className="mt-14 ml-64">
-      <Test/>
-      <Position/>
-    </section>
+    <NabFlagContext.Provider value={{ nabFlag, setNabFlag }}>
+      <Header />
+      <section className={`mt-14 ${nabFlag ? 'ml-0' : 'ml-64'} transition-all duration-500`}>
+        <Test/>
+        <Position/>
+      </section>
+    </NabFlagContext.Provider>
   );
 }

@@ -1,15 +1,18 @@
 'use client';
 
-import { useState } from "react";
+import { createContext, useContext } from "react";
 import { mainColor, subColor } from "@/app/style/color";
 import { faBars, faHouse, faMap, faRectangleList } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 
+// Contextの作成
+export const NabFlagContext = createContext<{ nabFlag: boolean, setNabFlag: (flag: boolean) => void }>({ nabFlag: true, setNabFlag: () => {} });
+
 export default function Header() {
-    const [nabFlag, setNabFlag] = useState<boolean>(true);
-    
+    const { nabFlag, setNabFlag } = useContext(NabFlagContext);
+
     const handleNab = () => {
         setNabFlag(!nabFlag);
     }
