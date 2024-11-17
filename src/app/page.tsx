@@ -3,9 +3,9 @@ import Test from "./components/test"; // 修正: ファイル名の大文字小�
 
 export default function Home() {
   return (
-    <>
+    <section className="mt-14 ml-64">
       <Test/>
       <Position/>
-    </>
+    </section>
   );
 }
