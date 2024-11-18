@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      translate: {
+        '-1/2': '-50%',
+      },
     },
   },
   plugins: [],
