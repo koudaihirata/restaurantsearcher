@@ -1,12 +1,12 @@
 import Position from "@/app/components/Position";
-import Test from "@/app/components/test";
+import ShopList from "./ShopList";
 
 
 export default function Home() {
     return(
-        <>
-            <Test />
+        <div className="pt-8 pl-10">
+            <ShopList />
             <Position />
-        </>
+        </div>
     )
 }

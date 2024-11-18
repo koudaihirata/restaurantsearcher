@@ -15,6 +15,9 @@ export default {
       translate: {
         '-1/2': '-50%',
       },
+      height: {
+        '70vh': '70vh',
+      },
     },
   },
   plugins: [],
