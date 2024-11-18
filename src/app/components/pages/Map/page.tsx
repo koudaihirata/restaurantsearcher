@@ -1,6 +1,6 @@
 
 
-export default function MapP() {
+export default function Map() {
     return(
         <>
             <p>mapページ</p>
