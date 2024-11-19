@@ -10,6 +10,7 @@ interface ShopInfoProps {
     name: string;
     address: string;
     access: string;
+    open: string;
     photo: {
         pc: {
             l: string;
@@ -26,7 +27,7 @@ export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps
     const [ shopData, setShopData ] = useState<ShopInfoProps[]>([]);
     const [ latitude, setLatitude ] = useState<number>(0);
     const [ longitude, setLongitude ] = useState<number>(0);
-
+    const [ loading, setLoading ] = useState<boolean>(true);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -42,28 +43,34 @@ export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps
     }, [])
 
     useEffect(() => {
+        setLoading(true);
         axios
             .get(`/api/search?latitude=${latitude}&longitude=${longitude}`)
             .then((response) => {
                 const shopData = response.data.results.shop;
                 setShopData(shopData);
                 onShopDataLoad(shopData);
+                setLoading(false);
                 console.log("取得した店舗データ:", shopData);
             })
             .catch((error) => {
                 console.error("APIエラー:", error);
+                setLoading(false);
             });
     }, [latitude, longitude]);
 
+    if (loading) {
+        return <div>ローディング中...</div>;
+    }
 
     return(
         <>
             {shopData.map((shop, index) => (
                 <div key={shop.id} onClick={() => onShopSelect(shop)}>
                     <div className="flex gap-4 ml-8 mr-8 mb-6 pt-8">
-                        <Image src={shop.photo.pc.l} alt="店の画像" width={80} height={80} className="rounded-lg max-h-[80] " />
+                        <Image src={shop.photo.pc.l} alt="店の画像" width={80} height={80} className="rounded-lg max-h-[80] max-w-[80]" />
                         <div className="flex flex-col gap-2">
-                            <h2 className="text-base">{shop.name}</h2>
+                            <h3 className="text-base">{shop.name}</h3>
                             <p className="text-xs">{shop.access}</p>
                             <div className="flex items-center gap-2">
                                 <FontAwesomeIcon icon={faTrainSubway} className="w-4 h-4" />

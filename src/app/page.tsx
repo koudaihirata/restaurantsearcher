@@ -11,6 +11,7 @@ interface selectedShopProps {
   name: string;
   access: string;
   address: string;
+  open: string;
   photo: {
     pc: {
       l: string;
@@ -35,10 +36,10 @@ export default function Home() {
     <App>
         <div className="pt-8 pl-10 pr-10">
           <div className="flex gap-8">
-            <div className="w-full h-70vh opacity-90 rounded-lg  overflow-auto" style={{backgroundColor:white}}>
+            <div className="w-full h-70vh opacity-90 rounded-lg  overflow-auto shadow" style={{backgroundColor:white}}>
               <ShopList onShopSelect={handleShopSelect} onShopDataLoad={handleShopDataLoad} />
             </div>
-            <div className="w-full h-70vh opacity-90 rounded-lg  overflow-auto" style={{backgroundColor:white}}>
+            <div className="w-full h-70vh opacity-90 rounded-lg  overflow-auto shadow" style={{backgroundColor:white}}>
               <ShopDetail shop={selectedShop} />
             </div>
           </div>
