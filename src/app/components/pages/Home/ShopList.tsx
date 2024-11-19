@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { accentColor } from "@/app/style/color";
 import axios from "axios";
@@ -19,7 +17,12 @@ interface ShopInfoProps {
     };
 }
 
-export default function ShopList() {
+interface ShopListProps {
+    onShopSelect: (shop: ShopInfoProps) => void;
+    onShopDataLoad: (shopData: ShopInfoProps[]) => void;
+}
+
+export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps) {
     const [ shopData, setShopData ] = useState<ShopInfoProps[]>([]);
     const [ latitude, setLatitude ] = useState<number>(0);
     const [ longitude, setLongitude ] = useState<number>(0);
@@ -42,8 +45,10 @@ export default function ShopList() {
         axios
             .get(`/api/search?latitude=${latitude}&longitude=${longitude}`)
             .then((response) => {
-                setShopData(response.data.results.shop);
-                console.log("取得した店舗データ:", response.data.results.shop);
+                const shopData = response.data.results.shop;
+                setShopData(shopData);
+                onShopDataLoad(shopData);
+                console.log("取得した店舗データ:", shopData);
             })
             .catch((error) => {
                 console.error("APIエラー:", error);
@@ -54,7 +59,7 @@ export default function ShopList() {
     return(
         <>
             {shopData.map((shop, index) => (
-                <div key={shop.id}>
+                <div key={shop.id} onClick={() => onShopSelect(shop)}>
                     <div className="flex gap-4 ml-8 mr-8 mb-6 pt-8">
                         <Image src={shop.photo.pc.l} alt="店の画像" width={80} height={80} className="rounded-lg max-h-[80] " />
                         <div className="flex flex-col gap-2">

@@ -23,7 +23,6 @@ export default function Header() {
             setNabFlag(true);
         }
 
-
         const handleMediaQueryChange = (event: MediaQueryListEvent) => {
             if (event.matches) {
                 setNabFlag(true);
