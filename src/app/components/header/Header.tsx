@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { mainColor, subColor } from "@/app/style/color";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +15,25 @@ export default function Header() {
     const handleNab = () => {
         setNabFlag(!nabFlag);
     }
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 910px)");
+
+        if (mediaQuery.matches) {
+            setNabFlag(true);
+        }
+
+
+        const handleMediaQueryChange = (event: MediaQueryListEvent) => {
+            if (event.matches) {
+                setNabFlag(true);
+            } else {
+                setNabFlag(false);
+            }
+        };
+
+        mediaQuery.addEventListener("change", handleMediaQueryChange);
+    },[])
 
     return (
         <header className="relative">

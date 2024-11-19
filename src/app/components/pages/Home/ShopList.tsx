@@ -56,7 +56,7 @@ export default function ShopList() {
             {shopData.map((shop, index) => (
                 <div key={shop.id}>
                     <div className="flex gap-4 ml-8 mr-8 mb-6 pt-8">
-                        <Image src={shop.photo.pc.l} alt="店の画像" width={80} height={80} className="rounded-lg" />
+                        <Image src={shop.photo.pc.l} alt="店の画像" width={80} height={80} className="rounded-lg max-h-[80] " />
                         <div className="flex flex-col gap-2">
                             <h2 className="text-base">{shop.name}</h2>
                             <p className="text-xs">{shop.access}</p>
