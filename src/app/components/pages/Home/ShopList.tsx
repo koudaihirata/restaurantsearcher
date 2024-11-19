@@ -21,17 +21,33 @@ interface ShopInfoProps {
 
 function ShopMap() {
     const [ shopData, setShopData ] = useState<ShopInfoProps[]>([]);
+    const [latitude, setLatitude] = useState<number>(0);
+    const [longitude, setLongitude] = useState<number>(0);
+
 
     const getData = async () => {
-        const response = await axios.get("/api/search");
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setLatitude(position.coords.latitude);
+                setLongitude(position.coords.longitude);
+            },
+            (error) => {
+                alert("位置情報が取得できませんでした");
+                console.error(error);
+            }
+        );
+
+        const response = await axios.get(`/api/search?latitude=${latitude}&longitude=${longitude}`);
         console.log(response.data.results.shop);
+        console.log(`${latitude}と${longitude}`);
+        
 
         setShopData(response.data.results.shop);
     };
 
     useEffect(() => {
         getData();
-    }, [])
+    }, [latitude, longitude])
 
     return(
         <>
@@ -39,7 +55,7 @@ function ShopMap() {
             <div key={shop.id}>
                 <div className="flex gap-4 ml-8 mr-8 mb-6 pt-8">
                     <Image src={shop.photo.pc.l} alt="店の画像" width={80} height={80} className="rounded-lg" />
-                    <div className="flex flex-col justify-around">
+                    <div className="flex flex-col gap-2">
                         <h2 className="text-base">{shop.name}</h2>
                         <p className="text-xs">{shop.access}</p>
                         <div className="flex items-center gap-2">

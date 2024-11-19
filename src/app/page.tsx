@@ -1,11 +1,13 @@
 import App from "./app";
-import HomePage from "./components/pages/Home/page";
+import ShopList from "./components/pages/Home/ShopList";
 
 export default function Home() {
 
   return (
     <App>
-      <HomePage />
+        <div className="pt-8 pl-10">
+            <ShopList />
+        </div>
     </App>
   );
 }
