@@ -17,7 +17,7 @@ export default function Header() {
     }
 
     useEffect(() => {
-        const mediaQuery = window.matchMedia("(max-width: 910px)");
+        const mediaQuery = window.matchMedia("(max-width: 1300px)");
 
         if (mediaQuery.matches) {
             setNabFlag(true);

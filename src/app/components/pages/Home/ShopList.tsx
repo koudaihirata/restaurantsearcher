@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { accentColor, fontColor, gray, white } from "@/app/style/color";
+import { accentColor, fontColor, gray, subColor } from "@/app/style/color";
 import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -103,7 +103,7 @@ export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps
                         className="px-4 py-2 rounded-lg"
                         style={{
                             backgroundColor: currentPage === index + 1 ? accentColor : gray,
-                            color: currentPage === index + 1 ? white : fontColor
+                            color: currentPage === index + 1 ? subColor : fontColor
                         }}
                     >
                         {index + 1}
