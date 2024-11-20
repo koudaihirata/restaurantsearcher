@@ -16,20 +16,22 @@ interface ShopDetailProps {
 
 export default function ShopDetail({ shop }: ShopDetailProps) {
     if (!shop) {
-        return <div>ローディング中...</div>;
+        return <div className="p-10">ローディング中...</div>;
     }
 
     return(
-        <div className="p-4 flex">
-            <Image src={shop.photo.pc.l} alt="店の画像" width={200} height={200} className="rounded-lg max-h-[200] max-w-[200]" />
-            <div className="ml-4 flex flex-col justify-around">
-                <section>
-                    <h2 className="text-2xl mb-1">{shop.name}</h2>
-                    <p className="text-xs">{shop.address}</p>
-                </section>
-                <p className="mb-2">{shop.access}</p>
-                <p>{shop.open}</p>
+        <div className="p-10">
+            <div className="flex">
+                <Image src={shop.photo.pc.l} alt="店の画像" width={200} height={200} className="rounded-lg max-h-[200] max-w-[200]" />
+                <div className="ml-4 flex flex-col justify-around">
+                    <section>
+                        <h2 className="text-2xl mb-3">{shop.name}</h2>
+                        <p className="text-xs">{shop.address}</p>
+                    </section>
+                    <p className="mb-2">{shop.access}</p>
+                </div>
             </div>
+            <p>{shop.open}</p>
         </div>
     )
 }

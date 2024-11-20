@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const latitude = searchParams.get('latitude');
   const longitude = searchParams.get('longitude');
   try {
-    const requestData = await axios.get(`${BASE_URL}?key=${API_KEY}&lat=${latitude}&lng=${longitude}&count=10&format=json`);
+    const requestData = await axios.get(`${BASE_URL}?key=${API_KEY}&lat=${latitude}&lng=${longitude}&count=30&format=json`);
     const responseData = requestData.data;
     return NextResponse.json(responseData);
   } catch (error) {
