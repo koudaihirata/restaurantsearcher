@@ -6,6 +6,7 @@ interface ShopDetailProps {
         address: string;
         access: string;
         open: string;
+        catch: string;
         photo: {
             pc: {
                 l: string;
@@ -31,7 +32,8 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
                     <p className="mb-2">{shop.access}</p>
                 </div>
             </div>
-            <p>{shop.open}</p>
+            <p className="mt-5">{shop.catch}</p>
+            <p className="mt-5">{shop.open}</p>
         </div>
     )
 }

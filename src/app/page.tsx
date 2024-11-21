@@ -12,6 +12,7 @@ interface selectedShopProps {
   access: string;
   address: string;
   open: string;
+  catch: string;
   photo: {
     pc: {
       l: string;

@@ -11,6 +11,7 @@ interface ShopInfoProps {
     address: string;
     access: string;
     open: string;
+    catch: string;
     photo: {
         pc: {
             l: string;
@@ -83,10 +84,9 @@ export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps
                         <Image src={shop.photo.pc.l} alt="店の画像" width={80} height={80} className="rounded-lg max-h-[80] max-w-[80] min-h-[80] min-w-[80] object-cover" />
                         <div className="flex flex-col gap-2">
                             <h3 className="text-base">{shop.name}</h3>
-                            <p className="text-xs">{shop.access}</p>
                             <div className="flex items-center gap-2">
                                 <FontAwesomeIcon icon={faTrainSubway} className="w-4 h-4" />
-                                <p className="text-xs">{shop.address}</p>
+                                <p className="text-xs">{shop.access}</p>
                             </div>
                         </div>
                     </div>
