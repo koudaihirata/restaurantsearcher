@@ -80,7 +80,7 @@ export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps
             {currentItems.map((shop, index) => (
                 <div key={shop.id} onClick={() => onShopSelect(shop)}>
                     <div className="flex gap-4 ml-8 mr-8 mb-6 pt-8">
-                        <Image src={shop.photo.pc.l} alt="店の画像" width={80} height={80} className="rounded-lg max-h-[80] max-w-[80]" />
+                        <Image src={shop.photo.pc.l} alt="店の画像" width={80} height={80} className="rounded-lg max-h-[80] max-w-[80] min-h-[80] min-w-[80] object-cover" />
                         <div className="flex flex-col gap-2">
                             <h3 className="text-base">{shop.name}</h3>
                             <p className="text-xs">{shop.access}</p>
