@@ -136,12 +136,11 @@ export default function ShopDetail({ shop }: ShopDetailProps) {
             </div>
             <p className="mt-5">{shop.catch}</p>
             <div className="mt-5">
-                <h3>営業時間:</h3>
-                <p>{shop.open}</p>
-                <ul>
+                <h3 className="text-center text-lg pb-4 pt-2">営業時間</h3>
+                <ul className="w-full flex flex-wrap justify-center gap-4">
                 {weekDays.map(day => (
-                    <li key={day}>
-                        <p>{day}:</p> {schedule[day].length > 0 ? schedule[day].join(', ') : '営業時間外'}
+                    <li key={day} className="flex flex-col items-center">
+                        <p>{day}</p> {schedule[day].length > 0 ? schedule[day].join(', ') : '閉店'}
                     </li>
                 ))}
                 </ul>
