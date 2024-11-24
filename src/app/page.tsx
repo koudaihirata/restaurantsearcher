@@ -47,7 +47,7 @@ export default function Home() {
               <ShopList onShopSelect={handleShopSelect} shopData={shopData} loading={loading} />
             </div>
             <div className="w-full h-70vh opacity-90 rounded-lg  overflow-auto shadow" style={{backgroundColor:white}}>
-              <ShopDetail shop={selectedShop} />
+              <ShopDetail shop={selectedShop} loading={loading} shopData={shopData} />
             </div>
           </div>
         </div>

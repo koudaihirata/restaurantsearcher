@@ -1,6 +1,20 @@
 import Image from "next/image";
 import { parseOperatingHours, Schedule } from '@/app/components/hooks/OpeningTimes';
 
+interface ShopInfoProps {
+    id: string;
+    name: string;
+    address: string;
+    access: string;
+    open: string;
+    catch: string;
+    photo: {
+        pc: {
+            l: string;
+        };
+    };
+}
+
 interface ShopDetailProps {
     shop: {
         name: string;
@@ -14,13 +28,33 @@ interface ShopDetailProps {
             };
         };
     } | null;
+    loading: boolean;
+    shopData: ShopInfoProps[];
 }
 
 const weekDays: string[] = ["月", "火", "水", "木", "金", "土", "日", "祝日", "祝前日"];
 
-export default function ShopDetail({ shop }: ShopDetailProps) {
+export default function ShopDetail({ shop, loading, shopData }: ShopDetailProps) {
+    if (loading) {
+        return (
+            <div className="w-full h-full flex justify-center items-center">
+                <h2 className="text-2xl">ローディング中...</h2>
+            </div>
+        );
+    }
+
+    if (shopData.length === 0) {
+        return (
+            <div className="w-full h-full flex justify-center items-center flex-col gap-3">
+                <Image src={"/error.png"} alt="404 not found" width={200} height={50} />
+                <h3 className="text-2xl">No stores found in your search</h3>
+            </div>
+        );
+    }
+
     if (!shop) {
-        return <div className="p-10">ローディング中...</div>;
+        // 店舗が選択されていない場合は何も表示しない
+        return null;
     }
 
     const schedule: Schedule = parseOperatingHours(shop.open);
