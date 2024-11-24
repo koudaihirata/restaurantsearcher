@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { parseOperatingHours, Schedule } from '@/app/components/utils/OpeningTimes';
+import { parseOperatingHours, Schedule } from '@/app/components/hooks/OpeningTimes';
 
 interface ShopDetailProps {
     shop: {
