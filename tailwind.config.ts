@@ -17,6 +17,10 @@ export default {
       },
       height: {
         '70vh': '70vh',
+        '80px': '80px',
+      },
+      width: {
+        '80px': '80px',
       },
     },
   },
