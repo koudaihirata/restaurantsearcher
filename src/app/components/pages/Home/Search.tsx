@@ -2,11 +2,12 @@ import { accentColor } from "@/app/style/color";
 import { faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import styles from "./styles.module.css";
 
 
 export default function Search() {
     const [ filterFlag, setFilterFlag ] = useState<boolean>(false);
-    const [keyword, setKeyword] = useState<string>("");
+    const [ keyword, setKeyword ] = useState<string>("");
 
     const handleSearch = ()=> {
         console.log("検索キーワード:", keyword);
@@ -41,7 +42,7 @@ export default function Search() {
                 </button>
             </div>
             {filterFlag && (
-                <div className="absolute top-12">
+                <div className={styles.filter}>
                     <p>検索条件</p>
                 </div>
             )}
