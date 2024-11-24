@@ -40,9 +40,17 @@ export default function ShopList({ onShopSelect, shopData, loading }: ShopListPr
 
     if (loading) {
         return (
-            <div className="w-full h-full flex justify-center items-center">
-                <h2 className="text-2xl">ローディング中...</h2>
-            </div>
+            <>
+                {Array.from({ length: itemsPerPage }).map((_, index) => (
+                    <div key={index} className="flex gap-4 ml-8 mr-8 mb-6 pt-8">
+                        <div className="w-20 h-20 bg-gray-300 animate-pulse rounded-lg"></div>
+                        <div className="flex flex-col gap-2">
+                            <div className="w-32 h-6 bg-gray-300 animate-pulse mb-2"></div>
+                            <div className="w-48 h-4 bg-gray-300 animate-pulse"></div>
+                        </div>
+                    </div>
+                ))}
+            </>
         );
     }
 
