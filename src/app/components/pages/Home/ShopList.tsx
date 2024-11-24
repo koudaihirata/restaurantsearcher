@@ -22,9 +22,10 @@ interface ShopInfoProps {
 interface ShopListProps {
     onShopSelect: (shop: ShopInfoProps) => void;
     shopData: ShopInfoProps[];
+    loading: boolean;
 }
 
-export default function ShopList({ onShopSelect, shopData }: ShopListProps) {
+export default function ShopList({ onShopSelect, shopData, loading }: ShopListProps) {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const itemsPerPage = 5;
 
@@ -36,6 +37,14 @@ export default function ShopList({ onShopSelect, shopData }: ShopListProps) {
     const endIndex = startIndex + itemsPerPage;
     const currentItems = shopData.slice(startIndex, endIndex);
     const totalPages = Math.ceil(shopData.length / itemsPerPage);
+
+    if (loading) {
+        return (
+            <div className="w-full h-full flex justify-center items-center">
+                <h2 className="text-2xl">ローディング中...</h2>
+            </div>
+        );
+    }
 
     if (shopData.length === 0) {
         return (

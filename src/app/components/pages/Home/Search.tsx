@@ -21,9 +21,10 @@ interface ShopInfoProps {
 
 interface SearchProps {
     onShopDataLoad: (shopData: ShopInfoProps[]) => void;
+    setLoading: (loading: boolean) => void;
 }
 
-export default function Search({ onShopDataLoad }: SearchProps) {
+export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
     const [ filterFlag, setFilterFlag ] = useState<boolean>(false);
     const [ keyword, setKeyword ] = useState<string>("");
     const [ latitude, setLatitude ] = useState<number | null>(null);
@@ -44,6 +45,7 @@ export default function Search({ onShopDataLoad }: SearchProps) {
 
     useEffect(() => {
         if (latitude !== null && longitude !== null) {
+            setLoading(true);
             axios
                 .get(`/api/search?latitude=${latitude}&longitude=${longitude}`)
                 .then((response) => {
@@ -53,12 +55,16 @@ export default function Search({ onShopDataLoad }: SearchProps) {
                 })
                 .catch((error) => {
                     console.error("APIエラー:", error);
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
         }
     }, [latitude, longitude]);
 
     const handleSearch = ()=> {
         if (latitude !== null && longitude !== null) {
+            setLoading(true);
             axios
                 .get(`/api/search?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}`)
                 .then((response) => {
@@ -68,6 +74,9 @@ export default function Search({ onShopDataLoad }: SearchProps) {
                 })
                 .catch((error) => {
                     console.error("APIエラー:", error);
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
         }
     }
