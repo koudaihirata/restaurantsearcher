@@ -5,6 +5,7 @@ import App from "./app";
 import ShopDetail from "./components/pages/Home/ShopDetail";
 import ShopList from "./components/pages/Home/ShopList";
 import { white } from "./style/color";
+import Search from "./components/pages/Home/Search";
 
 interface selectedShopProps {
   id: string;
@@ -36,6 +37,7 @@ export default function Home() {
   return (
     <App>
         <div className="pt-8 pl-10 pr-10">
+          <Search />
           <div className="flex gap-8">
             <div className="w-full h-70vh opacity-90 rounded-lg  overflow-auto shadow" style={{backgroundColor:white}}>
               <ShopList onShopSelect={handleShopSelect} onShopDataLoad={handleShopDataLoad} />
