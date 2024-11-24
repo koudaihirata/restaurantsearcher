@@ -23,24 +23,26 @@ interface selectedShopProps {
 
 export default function Home() {
   const [selectedShop, setSelectedShop] = useState<selectedShopProps | null>(null);
+  const [shopData, setShopData] = useState<selectedShopProps[]>([]);
 
   const handleShopSelect = (shop: selectedShopProps) => {
     setSelectedShop(shop);
   };
 
-  const handleShopDataLoad = (shopData: selectedShopProps[]) => {
-    if (shopData.length > 0) {
-      setSelectedShop(shopData[0]);
+  const handleShopDataLoad = (data: selectedShopProps[]) => {
+    setShopData(data);
+    if (data.length > 0) {
+      setSelectedShop(data[0]);
     }
   };
 
   return (
     <App>
         <div className="pt-8 pl-10 pr-10">
-          <Search />
+          <Search onShopDataLoad={handleShopDataLoad} />
           <div className="flex gap-8">
             <div className="w-full h-70vh opacity-90 rounded-lg  overflow-auto shadow" style={{backgroundColor:white}}>
-              <ShopList onShopSelect={handleShopSelect} onShopDataLoad={handleShopDataLoad} />
+              <ShopList onShopSelect={handleShopSelect} shopData={shopData} />
             </div>
             <div className="w-full h-70vh opacity-90 rounded-lg  overflow-auto shadow" style={{backgroundColor:white}}>
               <ShopDetail shop={selectedShop} />

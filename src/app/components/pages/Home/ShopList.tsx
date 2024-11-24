@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { accentColor, fontColor, gray, subColor } from "@/app/style/color";
-import axios from "axios";
+// import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrainSubway } from "@fortawesome/free-solid-svg-icons";
@@ -21,49 +21,12 @@ interface ShopInfoProps {
 
 interface ShopListProps {
     onShopSelect: (shop: ShopInfoProps) => void;
-    onShopDataLoad: (shopData: ShopInfoProps[]) => void;
+    shopData: ShopInfoProps[];
 }
 
-export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps) {
-    const [ shopData, setShopData ] = useState<ShopInfoProps[]>([]);
-    const [ latitude, setLatitude ] = useState<number | null>(null);
-    const [ longitude, setLongitude ] = useState<number | null>(null);
-    const [ loading, setLoading ] = useState<boolean>(true);
+export default function ShopList({ onShopSelect, shopData }: ShopListProps) {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const itemsPerPage = 5;
-
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                setLatitude(position.coords.latitude);
-                setLongitude(position.coords.longitude);
-            },
-            (error) => {
-                alert("位置情報が取得できませんでした");
-                console.error(error);
-            }
-        );
-    }, [])
-
-    useEffect(() => {
-        if (latitude !== null && longitude !== null) {
-            setLoading(true);
-            axios
-                .get(`/api/search?latitude=${latitude}&longitude=${longitude}`)
-                .then((response) => {
-                    const shopData = response.data.results.shop;
-                    setShopData(shopData);
-                    onShopDataLoad(shopData);
-                    setLoading(false);
-                    console.log("取得した店舗データ:", shopData);
-                })
-                .catch((error) => {
-                    console.error("APIエラー:", error);
-                    setLoading(false);
-                });            
-        }
-    }, [latitude, longitude]);
-
 
     const handlePageChange = (pageNumber: number) => {
         setCurrentPage(pageNumber);
@@ -73,10 +36,6 @@ export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps
     const endIndex = startIndex + itemsPerPage;
     const currentItems = shopData.slice(startIndex, endIndex);
     const totalPages = Math.ceil(shopData.length / itemsPerPage);
-
-    if (loading) {
-        return <div className="p-10">ローディング中...</div>;
-    }
 
     return(
         <>
