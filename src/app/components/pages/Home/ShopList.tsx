@@ -26,8 +26,8 @@ interface ShopListProps {
 
 export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps) {
     const [ shopData, setShopData ] = useState<ShopInfoProps[]>([]);
-    const [ latitude, setLatitude ] = useState<number>(0);
-    const [ longitude, setLongitude ] = useState<number>(0);
+    const [ latitude, setLatitude ] = useState<number | null>(null);
+    const [ longitude, setLongitude ] = useState<number | null>(null);
     const [ loading, setLoading ] = useState<boolean>(true);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const itemsPerPage = 5;
@@ -46,20 +46,22 @@ export default function ShopList({ onShopSelect, onShopDataLoad }: ShopListProps
     }, [])
 
     useEffect(() => {
-        setLoading(true);
-        axios
-            .get(`/api/search?latitude=${latitude}&longitude=${longitude}`)
-            .then((response) => {
-                const shopData = response.data.results.shop;
-                setShopData(shopData);
-                onShopDataLoad(shopData);
-                setLoading(false);
-                console.log("取得した店舗データ:", shopData);
-            })
-            .catch((error) => {
-                console.error("APIエラー:", error);
-                setLoading(false);
-            });
+        if (latitude !== null && longitude !== null) {
+            setLoading(true);
+            axios
+                .get(`/api/search?latitude=${latitude}&longitude=${longitude}`)
+                .then((response) => {
+                    const shopData = response.data.results.shop;
+                    setShopData(shopData);
+                    onShopDataLoad(shopData);
+                    setLoading(false);
+                    console.log("取得した店舗データ:", shopData);
+                })
+                .catch((error) => {
+                    console.error("APIエラー:", error);
+                    setLoading(false);
+                });            
+        }
     }, [latitude, longitude]);
 
 
