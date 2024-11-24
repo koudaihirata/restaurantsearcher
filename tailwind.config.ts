@@ -18,9 +18,11 @@ export default {
       height: {
         '70vh': '70vh',
         '80px': '80px',
+        '160px': '160px',
       },
       width: {
         '80px': '80px',
+        '160px': '160px',
       },
     },
   },

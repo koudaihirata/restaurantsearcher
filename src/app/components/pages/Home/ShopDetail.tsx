@@ -81,7 +81,7 @@ export default function ShopDetail({ shop, loading, shopData }: ShopDetailProps)
     return(
         <div className="p-10">
             <div className="flex">
-                <Image src={shop.photo.pc.l} alt="店の画像" width={160} height={160} className="rounded-lg max-h-[160] max-w-[160] min-h-[160] min-w-[160]" />
+                <Image src={shop.photo.pc.l} alt="店の画像" width={160} height={160} className="rounded-lg max-h-[160px] max-w-[160px] min-h-[160px] min-w-[160px]" />
                 <div className="ml-4 flex flex-col justify-around">
                     <section>
                         <h2 className="text-2xl mb-3">{shop.name}</h2>
