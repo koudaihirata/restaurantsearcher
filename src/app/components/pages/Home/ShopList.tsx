@@ -37,6 +37,15 @@ export default function ShopList({ onShopSelect, shopData }: ShopListProps) {
     const currentItems = shopData.slice(startIndex, endIndex);
     const totalPages = Math.ceil(shopData.length / itemsPerPage);
 
+    if (shopData.length === 0) {
+        return (
+            <div className="w-full h-full flex justify-center items-center flex-col gap-3">
+                <Image src={"/error.png"} alt="404 not found" width={200} height={50} />
+                <h3 className="text-2xl">No stores found in your search</h3>
+            </div>
+        )
+    }
+
     return(
         <>
             {currentItems.map((shop, index) => (

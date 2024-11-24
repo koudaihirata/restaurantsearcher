@@ -58,7 +58,18 @@ export default function Search({ onShopDataLoad }: SearchProps) {
     }, [latitude, longitude]);
 
     const handleSearch = ()=> {
-        console.log("検索キーワード:", keyword);
+        if (latitude !== null && longitude !== null) {
+            axios
+                .get(`/api/search?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}`)
+                .then((response) => {
+                    const shopData = response.data.results.shop;
+                    onShopDataLoad(shopData);
+                    console.log("取得した店舗データ:", shopData);
+                })
+                .catch((error) => {
+                    console.error("APIエラー:", error);
+                });
+        }
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

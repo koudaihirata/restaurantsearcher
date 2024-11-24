@@ -8,8 +8,14 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const latitude = searchParams.get('latitude');
   const longitude = searchParams.get('longitude');
+  const keyword = searchParams.get('keyword');
   try {
-    const requestData = await axios.get(`${BASE_URL}?key=${API_KEY}&lat=${latitude}&lng=${longitude}&count=30&format=json`);
+    let url = `${BASE_URL}?key=${API_KEY}&lat=${latitude}&lng=${longitude}&count=30&format=json`;
+    if (keyword) {
+      url += `&keyword=${keyword}`;
+    }
+
+    const requestData = await axios.get(url);
     const responseData = requestData.data;
     return NextResponse.json(responseData);
   } catch (error) {
