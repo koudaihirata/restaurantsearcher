@@ -30,6 +30,7 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
     const [ latitude, setLatitude ] = useState<number | null>(null);
     const [ longitude, setLongitude ] = useState<number | null>(null);
     const [ range, setRange ] = useState<number>(3);
+    const [ count, setCount ] = useState<number>(30);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -67,7 +68,7 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
         if (latitude !== null && longitude !== null) {
             setLoading(true);
             axios
-                .get(`/api/search?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}&range=${range}`)
+                .get(`/api/search?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}&range=${range}&count=${count}`)
                 .then((response) => {
                     const shopData = response.data.results.shop;
                     onShopDataLoad(shopData);
@@ -96,6 +97,10 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
         setRange(Number(event.target.value));
     }
 
+    const handleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCount(Number(event.target.value));
+    }
+
     return(
         <div className="w-full flex justify-center items-center mb-6 relative">
             <div className="w-96 h-10 relative">
@@ -114,6 +119,7 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
                     <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute w-5 h-5 top-2.5 right-3" style={{color:accentColor}} />
                 </button>
             </div>
-            <FilterComponent filterFlag={filterFlag} range={range} handleRangeChange={handleRangeChange} />        </div>
+            <FilterComponent filterFlag={filterFlag} range={range} count={count} handleRangeChange={handleRangeChange} handleCountChange={handleCountChange} />
+        </div>
     )
 }
