@@ -1,3 +1,4 @@
+import { accentColor } from "@/app/style/color";
 import styles from "./styles.module.css";
 
 interface FilterComponentProps {
@@ -39,6 +40,7 @@ export default function FilterComponent({ filterFlag, range, count, handleRangeC
                         </div>
                     ))}
                 </div>
+                <div className="w-full h-0.5 mt-2 mb-2" style={{backgroundColor:accentColor}}></div>
                 <p>件数</p>
                 <div className="flex gap-6">
                     {counts.map(({ id, value, label }) => (

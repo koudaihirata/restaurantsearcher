@@ -38,6 +38,42 @@ export default function ShopList({ onShopSelect, shopData, loading }: ShopListPr
     const currentItems = shopData.slice(startIndex, endIndex);
     const totalPages = Math.ceil(shopData.length / itemsPerPage);
 
+    const generatePageNumbers = () => {
+        const pages = [];
+        const maxPagesToShow = 7;
+        const halfMaxPagesToShow = Math.floor(maxPagesToShow / 2);
+
+        if (totalPages <= maxPagesToShow) {
+            for (let i = 1; i <= totalPages; i++) {
+                pages.push(i);
+            }
+        } else {
+            if (currentPage <= halfMaxPagesToShow) {
+                for (let i = 1; i <= maxPagesToShow - 2; i++) {
+                    pages.push(i);
+                }
+                pages.push('...');
+                pages.push(totalPages);
+            } else if (currentPage > totalPages - halfMaxPagesToShow) {
+                pages.push(1);
+                pages.push('...');
+                for (let i = totalPages - (maxPagesToShow - 3); i <= totalPages; i++) {
+                    pages.push(i);
+                }
+            } else {
+                pages.push(1);
+                pages.push('...');
+                for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                    pages.push(i);
+                }
+                pages.push('...');
+                pages.push(totalPages);
+            }
+        }
+
+        return pages;
+    };
+
     if (loading) {
         return (
             <>
@@ -83,17 +119,19 @@ export default function ShopList({ onShopSelect, shopData, loading }: ShopListPr
                 </div>
             ))}
             <div className="flex gap-8 justify-center mt-12 mb-10">
-                {Array.from({ length: totalPages }, (_, index) => (
+                {generatePageNumbers().map((page, index) => (
                     <button
-                        key={index + 1}
-                        onClick={() => handlePageChange(index + 1)}
+                        key={index}
+                        onClick={() => typeof page === 'number' && handlePageChange(page)}
                         className="px-4 py-2 rounded-lg"
                         style={{
-                            backgroundColor: currentPage === index + 1 ? accentColor : gray,
-                            color: currentPage === index + 1 ? subColor : fontColor
+                            backgroundColor: currentPage === page ? accentColor : gray,
+                            color: currentPage === page ? subColor : fontColor,
+                            cursor: typeof page === 'number' ? 'pointer' : 'default'
                         }}
+                        disabled={typeof page !== 'number'}
                     >
-                        {index + 1}
+                        {page}
                     </button>
                 ))}
             </div>
