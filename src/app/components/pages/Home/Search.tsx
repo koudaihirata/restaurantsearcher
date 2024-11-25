@@ -3,7 +3,7 @@ import { faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./styles.module.css";
+import FilterComponent from "./FilterComponent";
 
 interface ShopInfoProps {
     id: string;
@@ -114,34 +114,6 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
                     <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute w-5 h-5 top-2.5 right-3" style={{color:accentColor}} />
                 </button>
             </div>
-            <div className={`${styles.filter} ${filterFlag ? styles.show : ''}`}>
-                <div className="w-full h-full p-3 relative">
-                    <div className={styles.triangle}></div>
-                    <p>検索範囲</p>
-                    <div className="flex gap-6">
-                        <div className="flex gap-0.5">
-                            <input type="radio" id="range1" name="range" value={1} onChange={handleRangeChange} />
-                            <label htmlFor="range1">300m</label>
-                        </div>
-                        <div className="flex gap-0.5">
-                            <input type="radio" id="range2" name="range" value={2} onChange={handleRangeChange} />
-                            <label htmlFor="range2">500m</label>
-                        </div>
-                        <div className="flex gap-0.5">
-                            <input type="radio" id="range3" name="range" value={3} onChange={handleRangeChange} defaultChecked />
-                            <label htmlFor="range3">1000m</label>
-                        </div>
-                        <div className="flex gap-0.5">
-                            <input type="radio" id="range4" name="range" value={4} onChange={handleRangeChange} />
-                            <label htmlFor="range4">2000m</label>
-                        </div>
-                        <div className="flex gap-0.5">
-                            <input type="radio" id="range5" name="range" value={5} onChange={handleRangeChange} />
-                            <label htmlFor="range5">3000m</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <FilterComponent filterFlag={filterFlag} range={range} handleRangeChange={handleRangeChange} />        </div>
     )
 }
