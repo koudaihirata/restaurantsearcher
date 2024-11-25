@@ -9,8 +9,9 @@ export async function GET(request: Request) {
   const latitude = searchParams.get('latitude');
   const longitude = searchParams.get('longitude');
   const keyword = searchParams.get('keyword');
+  const range = searchParams.get('range');
   try {
-    let url = `${BASE_URL}?key=${API_KEY}&lat=${latitude}&lng=${longitude}&count=30&format=json`;
+    let url = `${BASE_URL}?key=${API_KEY}&lat=${latitude}&lng=${longitude}&range=${range}&count=30&format=json`;
     if (keyword) {
       url += `&keyword=${keyword}`;
     }

@@ -29,6 +29,7 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
     const [ keyword, setKeyword ] = useState<string>("");
     const [ latitude, setLatitude ] = useState<number | null>(null);
     const [ longitude, setLongitude ] = useState<number | null>(null);
+    const [ range, setRange ] = useState<number>(3);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -47,7 +48,7 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
         if (latitude !== null && longitude !== null) {
             setLoading(true);
             axios
-                .get(`/api/search?latitude=${latitude}&longitude=${longitude}`)
+                .get(`/api/search?latitude=${latitude}&longitude=${longitude}&range${range}`)
                 .then((response) => {
                     const shopData = response.data.results.shop;
                     onShopDataLoad(shopData);
@@ -66,7 +67,7 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
         if (latitude !== null && longitude !== null) {
             setLoading(true);
             axios
-                .get(`/api/search?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}`)
+                .get(`/api/search?keyword=${keyword}&latitude=${latitude}&longitude=${longitude}&range=${range}`)
                 .then((response) => {
                     const shopData = response.data.results.shop;
                     onShopDataLoad(shopData);
@@ -81,14 +82,18 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
         }
     }
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter' && !event.nativeEvent.isComposing) {
             handleSearch();
         }
     };
 
-    const filterFlagSwitch = ()=> {
+    const filterFlagSwitch = () => {
         setFilterFlag(!filterFlag);
+    }
+
+    const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRange(Number(event.target.value));
     }
 
     return(
@@ -109,11 +114,34 @@ export default function Search({ onShopDataLoad, setLoading }: SearchProps) {
                     <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute w-5 h-5 top-2.5 right-3" style={{color:accentColor}} />
                 </button>
             </div>
-            {filterFlag && (
-                <div className={styles.filter}>
-                    <p>検索条件</p>
+            <div className={`${styles.filter} ${filterFlag ? styles.show : ''}`}>
+                <div className="w-full h-full p-3 relative">
+                    <div className={styles.triangle}></div>
+                    <p>検索範囲</p>
+                    <div className="flex gap-6">
+                        <div className="flex gap-0.5">
+                            <input type="radio" id="range1" name="range" value={1} onChange={handleRangeChange} />
+                            <label htmlFor="range1">300m</label>
+                        </div>
+                        <div className="flex gap-0.5">
+                            <input type="radio" id="range2" name="range" value={2} onChange={handleRangeChange} />
+                            <label htmlFor="range2">500m</label>
+                        </div>
+                        <div className="flex gap-0.5">
+                            <input type="radio" id="range3" name="range" value={3} onChange={handleRangeChange} defaultChecked />
+                            <label htmlFor="range3">1000m</label>
+                        </div>
+                        <div className="flex gap-0.5">
+                            <input type="radio" id="range4" name="range" value={4} onChange={handleRangeChange} />
+                            <label htmlFor="range4">2000m</label>
+                        </div>
+                        <div className="flex gap-0.5">
+                            <input type="radio" id="range5" name="range" value={5} onChange={handleRangeChange} />
+                            <label htmlFor="range5">3000m</label>
+                        </div>
+                    </div>
                 </div>
-            )}
+            </div>
         </div>
     )
 }

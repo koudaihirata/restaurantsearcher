@@ -1,4 +1,30 @@
 .filter{
     position: absolute;
-    top: 40px;
+    top: 60px;
+    /* left: 0px; */
+    z-index: 1000;
+    width: 500px;
+    height: 200px;
+    background-color: #fff;
+    border: #FFC66F 3px solid;
+    border-radius: 8px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.filter.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.triangle{
+    position: absolute;
+    top: -20px;
+    left: 66;
+    z-index: 1000;
+    width: 20px;
+    height: 20px;
+    background-color: #FFC66F;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
