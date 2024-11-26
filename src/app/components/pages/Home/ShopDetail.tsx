@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { parseOperatingHours, Schedule } from '@/app/components/hooks/OpeningTimes';
+import Btn from "../../Btn";
 
 interface ShopInfoProps {
     id: string;
@@ -86,6 +87,10 @@ export default function ShopDetail({ shop, loading, shopData }: ShopDetailProps)
                     <section>
                         <h2 className="text-2xl mb-3">{shop.name}</h2>
                         <p className="text-xs">{shop.address}</p>
+                        <div>
+                            <Btn label="予約" />
+                            <Btn label="クーポンを見る" />                            
+                        </div>
                     </section>
                 </div>
             </div>
