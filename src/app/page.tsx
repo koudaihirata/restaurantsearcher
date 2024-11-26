@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import App from "./app";
 import ShopDetail from "./components/pages/Home/ShopDetail";
 import ShopList from "./components/pages/Home/ShopList";
-import { white } from "./style/color";
+import { accentColor, white } from "./style/color";
 import Search from "./components/pages/Home/Search";
 import ShopListSp from "./components/pages/Home/ShopListSp";
 
@@ -77,10 +77,13 @@ export default function Home() {
             {shopFlag ? (
               <div className="w-full h-70vh opacity-90 rounded-lg  overflow-auto shadow" style={{backgroundColor:white}}>
                 {showDetail ? (
-                  <div>
-                      <button onClick={handleBack}>戻る</button>
-                      <ShopDetail shop={selectedShop} loading={loading} shopData={shopData} />
-                  </div>
+                  <>
+                    <div onClick={handleBack} className="w-20 h-8 mt-4 ml-4 rounded-lg flex items-center gap-2" style={{backgroundColor:accentColor}}>
+                      <div className="arrow"></div>
+                      <p style={{color:white}}>戻る</p>
+                    </div>
+                    <ShopDetail shop={selectedShop} loading={loading} shopData={shopData} />
+                  </>
                 ) : (
                   <ShopListSp onShopSelect={handleShopSelect} shopData={shopData} loading={loading} />
                 )}              
