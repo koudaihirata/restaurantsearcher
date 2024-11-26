@@ -31,8 +31,8 @@ interface ShopListProps {
     loading: boolean;
 }
 
-export default function ShopList({ onShopSelect, shopData, loading }: ShopListProps) {
-    const [ currentPage, setCurrentPage ] = useState<number>(1);
+export default function ShopListSp({ onShopSelect, shopData, loading }: ShopListProps) {
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const itemsPerPage = 5;
 
     const handlePageChange = (pageNumber: number) => {
