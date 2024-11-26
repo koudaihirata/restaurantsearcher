@@ -31,7 +31,7 @@ export default function FilterComponent({ filterFlag, range, count, handleRangeC
             <div className="w-full h-full p-3 relative">
                 <div className={styles.triangle}></div>
                 <p>検索範囲</p>
-                <div className="flex gap-6">
+                <div className="flex gap-6 flex-wrap">
                     {ranges.map(({ id, value, label }) => (
                         <div key={id} className="flex gap-0.5">
                             <input type="radio" id={id} name="range" value={value} onChange={handleRangeChange} checked={range === value} />
@@ -41,7 +41,7 @@ export default function FilterComponent({ filterFlag, range, count, handleRangeC
                 </div>
                 <div className="w-full h-0.5 mt-2 mb-2" style={{backgroundColor:accentColor}}></div>
                 <p>件数</p>
-                <div className="flex gap-6">
+                <div className="flex gap-6 flex-wrap">
                     {counts.map(({ id, value, label }) => (
                         <div key={id} className="flex gap-0.5">
                             <input type="radio" id={id} name="count" value={value} onChange={handleCountChange} checked={count === value} />
