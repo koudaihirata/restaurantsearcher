@@ -17,6 +17,13 @@ interface ShopInfoProps {
             l: string;
         };
     };
+    urls: {
+        pc: string;
+    }
+    coupon_urls: {
+        pc: string;
+        sp: string;
+    }
 }
 
 interface SearchProps {

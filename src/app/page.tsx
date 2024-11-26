@@ -19,6 +19,13 @@ interface selectedShopProps {
       l: string;
     };
   };
+  urls: {
+    pc: string;
+  }
+  coupon_urls: {
+    pc: string;
+    sp: string;
+  }
 }
 
 export default function Home() {

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { parseOperatingHours, Schedule } from '@/app/components/hooks/OpeningTimes';
 import Btn from "../../Btn";
+import { useEffect, useState } from "react";
 
 interface ShopInfoProps {
     id: string;
@@ -28,6 +29,13 @@ interface ShopDetailProps {
                 l: string;
             };
         };
+        urls: {
+            pc: string;
+        }
+        coupon_urls: {
+            pc: string;
+            sp: string;
+        }
     } | null;
     loading: boolean;
     shopData: ShopInfoProps[];
@@ -36,6 +44,14 @@ interface ShopDetailProps {
 const weekDays: string[] = ["月", "火", "水", "木", "金", "土", "日", "祝日", "祝前日"];
 
 export default function ShopDetail({ shop, loading, shopData }: ShopDetailProps) {
+    const [isMobile, setIsMobile] = useState<boolean>(false);
+
+    useEffect(() => {
+        const userAgent = window.navigator.userAgent;
+        const mobileRegex = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+        setIsMobile(mobileRegex.test(userAgent));
+    }, []);
+
     if (loading) {
         return (
             <div className="p-10">
@@ -87,9 +103,13 @@ export default function ShopDetail({ shop, loading, shopData }: ShopDetailProps)
                     <section>
                         <h2 className="text-2xl mb-3">{shop.name}</h2>
                         <p className="text-xs">{shop.address}</p>
-                        <div>
-                            <Btn label="予約" />
-                            <Btn label="クーポンを見る" />                            
+                        <div className="flex gap-2 mt-4">
+                            <Btn label="予約" url={shop.urls.pc} />
+                            {isMobile ? (
+                                <Btn label="クーポンを見る" url={shop.coupon_urls.sp} />   
+                            ) : (
+                                <Btn label="クーポンを見る" url={shop.coupon_urls.pc} />                            
+                            )}
                         </div>
                     </section>
                 </div>
