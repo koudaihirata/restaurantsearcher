@@ -9,8 +9,10 @@ interface BtnProps {
 
 export default function Btn(Props: BtnProps) {
     return(
-        <Link href={Props.url}>
-            <button className="pt-1 pb-1 pl-2 pr-2 rounded-lg" style={{backgroundColor:accentColor,color:white}}>{Props.label}</button>
+        <Link href={Props.url} legacyBehavior passHref>
+            <a target="_blank" rel="noopener noreferrer">
+                <button className="pt-1 pb-1 pl-2 pr-2 rounded-lg" style={{backgroundColor:accentColor,color:white}}>{Props.label}</button>
+            </a>
         </Link>
     )
 }
