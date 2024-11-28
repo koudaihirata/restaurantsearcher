@@ -9,12 +9,6 @@ RestaurantSearcher
 ### 動作対象OS
 Chromeブラウザ
 
-### 公開したアプリの URL（Store にリリースしている場合）
-https://restaurantsearcher.vercel.app
-
-### 該当プロジェクトのリポジトリ URL（GitHub,GitLab など Git ホスティングサービスを利用されている場合）
-https://github.com/koudaihirata/restaurantsearcher
-
 ## 開発環境
 ### 開発環境
 node v20.12.1
@@ -78,6 +72,6 @@ APIから受け取った営業時間をそのまま表示する場合に見に�
 - リファクタリングの仕方
 - 技術選定の仕方
 
-###自己評価
+### 自己評価
 自分で点数をつけるなら65点
 理由は、最低限の機能は実装しているのである程度はいいのですが、自分
