@@ -39,6 +39,7 @@ tailwindcss v3.4.1
 
 #### API関係
 - ホットペッパーグルメサーチAPI
+- Geolocation API
 #### フロントエンドフレームワーク
 - React
 - next.js
