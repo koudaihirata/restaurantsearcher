@@ -124,7 +124,7 @@ export default function ShopListSp({ onShopSelect, shopData, loading }: ShopList
                     )}
                 </div>
             ))}
-            <div className="flex gap-8 justify-center mt-12 mb-10">
+            <div className="flex gap-2 justify-center mt-12 mb-10">
                 {generatePageNumbers().map((page, index) => (
                     <button
                         key={index}
