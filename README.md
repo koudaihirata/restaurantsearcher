@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 簡易仕様書
 
-## Getting Started
+### 作者
+平田 晃大
+### アプリ名
+RestaurantSearcher
 
-First, run the development server:
+## 動作対象端末・OS
+### 動作対象OS
+Chromeブラウザ
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 公開したアプリの URL（Store にリリースしている場合）
+https://restaurantsearcher.vercel.app
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 該当プロジェクトのリポジトリ URL（GitHub,GitLab など Git ホスティングサービスを利用されている場合）
+https://github.com/koudaihirata/restaurantsearcher
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 開発環境
+### 開発環境
+node v20.12.1
+react v18.3.1
+next v15.0.3
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 開発言語
+typescript v5
+tailwindcss v3.4.1
 
-## Learn More
+## 開発期間
+14日間
 
-To learn more about Next.js, take a look at the following resources:
+## アプリケーション機能
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 機能一覧
+- レストラン検索：ホットペッパーグルメサーチAPIを使用して、現在地から近い飲食店を検索する。
+- レストラン情報取得：ホットペッパーグルメサーチAPIを使用して、飲食店の詳細情報を取得する。
+- マップ表示：googleマップを使用して現在地や現在地から店までの距離を視覚的に表示する。※この機能は実装できませんでした🥹
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 画面一覧
+- ホーム画面 ：店の検索,検索結果の一覧,見たい店の詳細情報,マップを1画面上で表示
+※マップは実装できませんでした🥹
+- リスト画面 ：検索結果の飲食店を一覧表示と選択した店の詳細を表示する。※実装できませんでした🥹
+- マップ画面 ：検索結果の飲食店を画面全体のマップに表示する ※実装できませんでした🥹
 
-## Deploy on Vercel
+### 使用しているAPI,SDK,ライブラリ,フレームワークなど
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### API関係
+- ホットペッパーグルメサーチAPI
+#### フロントエンドフレームワーク
+- React
+- next.js
+#### アイコンライブラリ
+- FontAwesome
+#### HTTPクライアントライブラリ
+- axios
+#### プログラミング言語/型システム
+- TypeScript
+#### コード品質ツール
+- ESLint
+#### スタイリングフレームワーク
+- Tailwind CSS
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### テーブル定義(ER図)などの設計ドキュメント
+- ないです
+
+### コンセプト
+今、食べに行きたいお店が見つけれる
+
+### こだわったポイント
+APIから受け取った営業時間をそのまま表示する場合に見にくいと感じたので、見やすいように表示するロジックを頑張りました
+
+### デザイン面でこだわったポイント
+店の一覧と詳細を１ページでまとめ見やすく配置した
+
+## アドバイスして欲しいポイント
+- プロジェクトのファイル構造
+- 関数名の命名方法
+- 綺麗なプログラムの書き方&考え方
+- リファクタリングの仕方
+- 技術選定の仕方
+
+###自己評価
+自分で点数をつけるなら65点
+理由は、最低限の機能は実装しているのである程度はいいのですが、自分

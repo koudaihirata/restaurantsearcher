@@ -96,8 +96,8 @@ export default function ShopDetail({ shop, loading, shopData }: ShopDetailProps)
     const schedule: Schedule = parseOperatingHours(shop.open);
 
     return(
-        <div className="p-10">
-            <div className="flex flex-wrap justify-center">
+        <div className="p-6">
+            <div className="flex flex-wrap justify-around">
                 <Image src={shop.photo.pc.l} alt="店の画像" width={160} height={160} className="rounded-lg max-h-[160px] max-w-[160px] min-h-[160px] min-w-[160px]" />
                 <div className="ml-4 flex flex-col justify-around">
                     <section>
