@@ -1,8 +1,9 @@
-import { useState } from "react";
 import { accentColor, fontColor, gray, subColor } from "@/app/style/color";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrainSubway } from "@fortawesome/free-solid-svg-icons";
+import { Paging } from "../../hooks/Paging";
+import { Loading, NotFound } from "../../utils/LoadRendering";
 
 interface ShopInfoProps {
     id: string;
@@ -32,79 +33,18 @@ interface ShopListProps {
 }
 
 export default function ShopList({ onShopSelect, shopData, loading }: ShopListProps) {
-    const [ currentPage, setCurrentPage ] = useState<number>(1);
     const itemsPerPage = 5;
+    const { currentPage, currentItems, generatePageNumbers, handlePageChange } = Paging(shopData, itemsPerPage);
 
-    const handlePageChange = (pageNumber: number) => {
-        setCurrentPage(pageNumber);
-    };
-
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentItems = shopData.slice(startIndex, endIndex);
-    const totalPages = Math.ceil(shopData.length / itemsPerPage);
-
-    const generatePageNumbers = () => {
-        const pages = [];
-        const maxPagesToShow = 7;
-        const halfMaxPagesToShow = Math.floor(maxPagesToShow / 2);
-
-        if (totalPages <= maxPagesToShow) {
-            for (let i = 1; i <= totalPages; i++) {
-                pages.push(i);
-            }
-        } else {
-            if (currentPage <= halfMaxPagesToShow) {
-                for (let i = 1; i <= maxPagesToShow - 2; i++) {
-                    pages.push(i);
-                }
-                pages.push('...');
-                pages.push(totalPages);
-            } else if (currentPage > totalPages - halfMaxPagesToShow) {
-                pages.push(1);
-                pages.push('...');
-                for (let i = totalPages - (maxPagesToShow - 3); i <= totalPages; i++) {
-                    pages.push(i);
-                }
-            } else {
-                pages.push(1);
-                pages.push('...');
-                for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-                    pages.push(i);
-                }
-                pages.push('...');
-                pages.push(totalPages);
-            }
-        }
-
-        return pages;
-    };
 
     if (loading) {
-        return (
-            <>
-                {Array.from({ length: itemsPerPage }).map((_, index) => (
-                    <div key={index} className="flex gap-4 ml-8 mr-8 mb-6 pt-8">
-                        <div className="w-20 h-20 bg-gray-300 animate-pulse rounded-lg"></div>
-                        <div className="flex flex-col gap-2">
-                            <div className="w-32 h-6 bg-gray-300 animate-pulse mb-2"></div>
-                            <div className="w-48 h-4 bg-gray-300 animate-pulse"></div>
-                        </div>
-                    </div>
-                ))}
-            </>
-        );
+        return <>{Loading(itemsPerPage)}</>;
     }
 
     if (shopData.length === 0) {
-        return (
-            <div className="w-full h-full flex justify-center items-center flex-col gap-3">
-                <Image src={"/error.png"} alt="404 not found" width={200} height={50} />
-                <h3 className="text-2xl">No stores found in your search</h3>
-            </div>
-        )
+        return NotFound();
     }
-
+    
     return(
         <>
             {currentItems.map((shop, index) => (
