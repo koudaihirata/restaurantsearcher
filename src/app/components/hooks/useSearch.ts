@@ -61,6 +61,8 @@ export function useSearch({ onShopDataLoad, setLoading }: UseSearchParams) {
                 .then((response) => {
                     const shopData = response.data.results.shop;
                     onShopDataLoad(shopData);
+                    console.log(shopData);
+                    
                 })
                 .catch((error) => {
                     console.error("APIエラー:", error);
